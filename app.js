@@ -9,8 +9,7 @@ const { sequelize } = require("./models/index");
 const { authRouter } = require("./router/auth");
 
 const app = express();
-const port = 8000;
-const host = "localhost";
+
 const { errorMiddleware } = require("./middleware/errorMiddleware");
 const { profileRouter } = require("./router/profile");
 const { authMiddleware } = require("./middleware/authMiddleware");
@@ -41,9 +40,9 @@ const startServer = async () => {
             "⚡️[database]: Database connection has been established successfully."
         );
 
-        app.listen(port, host, () => {
+        app.listen(process.env.PORT, process.env.HOST, () => {
             console.log(
-                `⚡️[server]: Server is listening on http://${host}:${port}`
+                `⚡️[server]: Server is listening on http://${process.env.HOST}:${process.env.PORT}`
             );
         });
     } catch (error) {
