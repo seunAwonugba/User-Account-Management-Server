@@ -9,7 +9,8 @@ const { sequelize } = require("./models/index");
 const { authRouter } = require("./router/auth");
 
 const app = express();
-
+const port = process.env.PORT || 8000;
+const host = process.env.HOST;
 const { errorMiddleware } = require("./middleware/errorMiddleware");
 const { profileRouter } = require("./router/profile");
 const { authMiddleware } = require("./middleware/authMiddleware");
@@ -40,9 +41,9 @@ const startServer = async () => {
             "⚡️[database]: Database connection has been established successfully."
         );
 
-        app.listen(process.env.PORT, process.env.HOST, () => {
+        app.listen(port, host, () => {
             console.log(
-                `⚡️[server]: Server is listening on http://${process.env.HOST}:${process.env.PORT}`
+                `⚡️[server]: Server is listening on http://${host}:${port}`
             );
         });
     } catch (error) {
