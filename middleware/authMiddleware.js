@@ -15,7 +15,6 @@ const authMiddleware = async (req, res, next) => {
     try {
         //verify you got the correct token, it returns the obj in your signed token
         const decode = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
-        console.log(decode);
 
         //if verification is successfully, set up a property on the request object, call it user, and pass it to the next middleware which it the next route after logging in
 

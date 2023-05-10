@@ -55,12 +55,10 @@ const login = async (req, res, next) => {
 };
 
 const refreshToken = async (req, res, next) => {
-    console.log(req.body);
     try {
         const data = await userService.refreshToken(req.body);
         return res.status(StatusCodes.CREATED).json(data);
     } catch (error) {
-        console.log(error);
         next(error);
     }
 };

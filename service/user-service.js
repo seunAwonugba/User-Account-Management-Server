@@ -156,7 +156,6 @@ class UserService {
         }
 
         const decode = VerifyToken(query.token);
-        // console.log(decode);
 
         if (decode.message) {
             throw new Unauthenticated(

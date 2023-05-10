@@ -4,7 +4,6 @@ const { ProfileService } = require("../service/profile-service");
 const profileService = new ProfileService();
 
 const getProfile = async (req, res, next) => {
-    // console.log(req);
     try {
         const profile = await profileService.getProfile(req.user.id);
         return res.status(StatusCodes.OK).json(profile);
