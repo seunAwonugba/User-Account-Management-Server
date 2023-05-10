@@ -17,6 +17,15 @@ class ProfileService {
             data: userProfile,
         };
     }
+
+    async editProfile(payload) {
+        const newProfile = await this.profileRepository.editProfile(payload);
+
+        return {
+            success: true,
+            data: newProfile,
+        };
+    }
 }
 
 module.exports = { ProfileService };

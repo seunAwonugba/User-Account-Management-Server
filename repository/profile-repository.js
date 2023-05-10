@@ -17,6 +17,39 @@ class ProfileRepository {
 
         return userProfile;
     }
+
+    async editProfile(payload) {
+        const {
+            photo,
+            firstName,
+            lastName,
+            email,
+            gender,
+            age,
+            dob,
+            maritalStatus,
+            nationality,
+            userId,
+        } = payload;
+
+        const profile = await this.getProfile(userId);
+
+        await profile.update({
+            photo,
+            firstName,
+            lastName,
+            email,
+            gender,
+            age,
+            dob,
+            maritalStatus,
+            nationality,
+        });
+
+        await profile.save();
+
+        return profile;
+    }
 }
 
 module.exports = { ProfileRepository };

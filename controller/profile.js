@@ -12,4 +12,13 @@ const getProfile = async (req, res, next) => {
     }
 };
 
-module.exports = { getProfile };
+const editProfile = async (req, res, next) => {
+    try {
+        const newProfile = await profileService.editProfile(req.body);
+        return res.status(StatusCodes.CREATED).json(newProfile);
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { getProfile, editProfile };
