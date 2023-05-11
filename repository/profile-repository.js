@@ -32,23 +32,29 @@ class ProfileRepository {
             userId,
         } = payload;
 
-        const profile = await this.getProfile(userId);
+        const newProfile = await profile.update(
+            {
+                photo,
+                firstName,
+                lastName,
+                email,
+                gender,
+                age,
+                dob,
+                maritalStatus,
+                nationality,
+            },
+            {
+                where: {
+                    userId,
+                },
+                returning: true,
+            }
+        );
 
-        await profile.update({
-            photo,
-            firstName,
-            lastName,
-            email,
-            gender,
-            age,
-            dob,
-            maritalStatus,
-            nationality,
-        });
+        const [_numAffectedRows, [updatedData]] = newProfile;
 
-        await profile.save();
-
-        return profile;
+        return updatedData;
     }
 }
 

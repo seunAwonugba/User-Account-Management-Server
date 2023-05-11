@@ -19,6 +19,8 @@ class ProfileService {
     }
 
     async editProfile(payload) {
+        await this.getProfile(payload.userId);
+
         const newProfile = await this.profileRepository.editProfile(payload);
 
         return {
