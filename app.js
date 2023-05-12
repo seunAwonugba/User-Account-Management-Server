@@ -14,6 +14,7 @@ const host = process.env.HOST;
 const { errorMiddleware } = require("./middleware/errorMiddleware");
 const { profileRouter } = require("./router/profile");
 const { authMiddleware } = require("./middleware/authMiddleware");
+const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 
 app.set("trust proxy", 1);
 app.use(
@@ -29,6 +30,12 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
+app.get("/", (req, res) => {
+    return res.status(StatusCodes.OK).json({
+        success: true,
+        data: ReasonPhrases.OK,
+    });
+});
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/profile", authMiddleware, profileRouter);
 
