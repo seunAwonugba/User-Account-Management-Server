@@ -20,7 +20,7 @@ class ProfileRepository {
 
     async editProfile(payload) {
         const {
-            photo,
+            // photo,
             firstName,
             lastName,
             email,
@@ -34,7 +34,7 @@ class ProfileRepository {
 
         const newProfile = await profile.update(
             {
-                photo,
+                // photo,
                 firstName,
                 lastName,
                 email,

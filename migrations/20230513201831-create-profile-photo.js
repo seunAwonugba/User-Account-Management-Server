@@ -18,6 +18,16 @@ module.exports = {
             blob: {
                 type: Sequelize.BLOB,
             },
+            userId: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: "User id is required",
+                    },
+                },
+                unique: true,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

@@ -23,6 +23,14 @@ module.exports = (sequelize, DataTypes) => {
                     allowNull: false,
                 },
             });
+
+            User.hasOne(models.profilephoto, {
+                onDelete: "CASCADE",
+                foreignKey: {
+                    name: "userId",
+                    allowNull: false,
+                },
+            });
         }
 
         toJSON() {

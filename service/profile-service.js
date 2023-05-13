@@ -28,6 +28,7 @@ class ProfileService {
             data: newProfile,
         };
     }
+    
 }
 
 module.exports = { ProfileService };

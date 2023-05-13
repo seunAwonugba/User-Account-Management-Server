@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            ProfilePhoto.belongsTo(models.user);
         }
     }
     ProfilePhoto.init(
@@ -16,6 +17,19 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             name: DataTypes.STRING,
             blob: DataTypes.BLOB,
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: "User id is required",
+                    },
+                },
+                unique: {
+                    args: true,
+                    msg: "Token unique to a user",
+                },
+            },
         },
         {
             sequelize,

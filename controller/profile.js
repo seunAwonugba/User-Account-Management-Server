@@ -21,4 +21,8 @@ const editProfile = async (req, res, next) => {
     }
 };
 
+const updateProfileImage = async(req,res,next) => {
+    
+}
+
 module.exports = { getProfile, editProfile };
