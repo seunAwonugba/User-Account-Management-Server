@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
     Profile.init(
         {
-            photo: { type: DataTypes.STRING, allowNull: true },
             firstName: {
                 type: DataTypes.STRING,
                 allowNull: false,
