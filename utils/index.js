@@ -28,7 +28,7 @@ module.exports.GenerateRefreshToken = async (params) => {
     }
 };
 
-module.exports.VerifyToken = (accessToken) => {
+module.exports.VerifyToken = async (accessToken) => {
     try {
         const token = jwt.verify(accessToken, process.env.JWT_PRIVATE_KEY);
         return token;

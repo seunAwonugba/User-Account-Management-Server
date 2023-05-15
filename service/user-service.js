@@ -21,12 +21,16 @@ const {
 const { sendConfirmEmail, sendResetPasswordLink } = require("../utils/mailer");
 const { TokenRepository } = require("../repository/token-repository");
 const { ProfileRepository } = require("../repository/profile-repository");
+const {
+    ProfileImageRepository,
+} = require("../repository/profile-image-repository");
 
 class UserService {
     constructor() {
         this.userRepository = new UserRepository();
         this.tokenRepository = new TokenRepository();
         this.profileRepository = new ProfileRepository();
+        this.profileImageRepository = new ProfileImageRepository();
     }
 
     async signUp(payload) {
@@ -74,24 +78,33 @@ class UserService {
             throw new BadRequest("User not found");
         }
 
-        const accessToken = await user.getToken();
-        const userToken = accessToken.token;
+        if (user.isActive == true) {
+            return {
+                success: true,
+                data: "Email confirmation is successful, kindly proceed to login if you are not redirected",
+            };
+        }
 
-        if (userToken != token) {
+        const userToken = await this.tokenRepository.findTokenByUserId(user.id);
+
+        if (!userToken || userToken.token !== token) {
             throw new BadRequest("Invalid token");
         }
 
-        const verifyToken = VerifyToken(userToken);
+        const verifyToken = await VerifyToken(userToken.token);
 
         if (verifyToken.message) {
             await this.userRepository.deleteUserById(id);
-
             await this.tokenRepository.deleteToken(id);
 
-            return {
-                success: false,
-                data: `${verifyToken.message}: Please sign up again`,
-            };
+            throw new BadRequest(
+                `${verifyToken.message}: Please sign up again`
+            );
+
+            // return {
+            //     success: false,
+            //     data: `${verifyToken.message}: Please sign up again`,
+            // };
         }
 
         user.isActive = true;
@@ -105,6 +118,8 @@ class UserService {
             email: user.email,
             userId: user.id,
         });
+
+        await this.profileImageRepository.createProfileImage(user.id);
 
         return {
             success: true,

@@ -10,10 +10,20 @@ class TokenRepository {
         return createToken;
     }
 
-    async findToken({ accessToken }) {
+    async findToken(accessToken) {
         const findToken = token.findOne({
             where: {
                 token: accessToken,
+            },
+        });
+
+        return findToken;
+    }
+
+    async findTokenByUserId(userId) {
+        const findToken = token.findOne({
+            where: {
+                userId,
             },
         });
 
@@ -27,7 +37,7 @@ class TokenRepository {
             },
         });
 
-        return deleteToken
+        return deleteToken;
     }
 }
 

@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(xss());
-
+app.use(express.static("uploads"));
 app.get("/", (req, res) => {
     return res.status(StatusCodes.OK).json({
         success: true,

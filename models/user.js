@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
             });
 
-            User.hasOne(models.profilephoto, {
+            User.hasOne(models.profilePhoto, {
                 onDelete: "CASCADE",
                 foreignKey: {
                     name: "userId",

@@ -1,12 +1,16 @@
 const { UserRepository } = require("../repository/user-repository");
 const { user } = require("../models");
 const { BadRequest, UnprocessableEntity } = require("../error");
+const {
+    ProfileImageRepository,
+} = require("../repository/profile-image-repository");
 class ProfileImageService {
     constructor() {
         this.userRepository = new UserRepository();
+        this.profileImageRepository = new ProfileImageRepository();
     }
 
-    async uploadProfileImage(payload) {
+    async updateProfileImage(payload) {
         const user = await this.userRepository.findUserById(payload.userId);
 
         if (!user) {
@@ -19,6 +23,14 @@ class ProfileImageService {
             );
         }
 
-        
+        const profileImage =
+            await this.profileImageRepository.updateProfileImage(payload);
+
+        return {
+            success: true,
+            data: profileImage,
+        };
     }
 }
+
+module.exports = { ProfileImageService };
