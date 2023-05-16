@@ -24,15 +24,11 @@ const editProfile = async (req, res, next) => {
 };
 
 const updateProfileImage = async (req, res, next) => {
-    const payload = {
-        file: req.file.fileName,
-        userId: req.user.id,
-        type: req.file.mimetype,
-        name: req.file.fieldName,
-    };
+    // console.log(req.file);
     try {
         const updateProfileImage = await profileImageService.updateProfileImage(
-            payload
+            req.file,
+            req.user.id
         );
         return res.status(StatusCodes.CREATED).json(updateProfileImage);
     } catch (error) {

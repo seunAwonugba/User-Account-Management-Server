@@ -12,7 +12,7 @@ const profileRouter = express.Router();
 
 profileRouter.get("/get-profile", getProfile);
 profileRouter.patch("/edit-profile", editProfile);
-profileRouter.put(
+profileRouter.patch(
     "/update-profile-image",
     imageUploadMiddleware.single("profile-image"),
     updateProfileImage

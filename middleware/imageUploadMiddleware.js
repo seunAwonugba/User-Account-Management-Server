@@ -10,12 +10,12 @@ const imageFilter = (req, file, cb) => {
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, __basedir + "uploads");
-        // cb(null, 'uploads/');
+        cb(null, "uploads/");
     },
     filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-        cb(null, file.filename + "-" + uniqueSuffix);
+        // console.log(file);
+        const uniquePrefix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+        cb(null, `${uniquePrefix}-${file.originalname}`);
     },
 });
 

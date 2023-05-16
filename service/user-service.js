@@ -100,11 +100,6 @@ class UserService {
             throw new BadRequest(
                 `${verifyToken.message}: Please sign up again`
             );
-
-            // return {
-            //     success: false,
-            //     data: `${verifyToken.message}: Please sign up again`,
-            // };
         }
 
         user.isActive = true;

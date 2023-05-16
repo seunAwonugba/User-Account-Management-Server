@@ -10,21 +10,17 @@ class ProfileImageService {
         this.profileImageRepository = new ProfileImageRepository();
     }
 
-    async updateProfileImage(payload) {
-        const user = await this.userRepository.findUserById(payload.userId);
-
-        if (!user) {
-            throw new BadRequest("User not found");
-        }
-
-        if (payload.file == undefined) {
-            throw new UnprocessableEntity(
-                "Select a image to update profile image "
-            );
+    async updateProfileImage(payload, userId) {
+        console.log(payload);
+        if (!payload) {
+            throw new UnprocessableEntity("Select image");
         }
 
         const profileImage =
-            await this.profileImageRepository.updateProfileImage(payload);
+            await this.profileImageRepository.updateProfileImage(
+                payload,
+                userId
+            );
 
         return {
             success: true,

@@ -9,14 +9,23 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            type: {
+            fieldName: {
                 type: Sequelize.STRING,
             },
-            name: {
+            originalName: {
                 type: Sequelize.STRING,
             },
-            blob: {
-                type: Sequelize.BLOB,
+            mimeType: {
+                type: Sequelize.STRING,
+            },
+            fileName: {
+                type: Sequelize.STRING,
+            },
+            path: {
+                type: Sequelize.STRING,
+            },
+            size: {
+                type: Sequelize.INTEGER,
             },
             userId: {
                 type: Sequelize.INTEGER,

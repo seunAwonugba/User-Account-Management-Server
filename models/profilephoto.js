@@ -14,9 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
     ProfilePhoto.init(
         {
-            type: DataTypes.STRING,
-            name: DataTypes.STRING,
-            blob: DataTypes.BLOB,
+            fieldName: DataTypes.STRING,
+            originalName: DataTypes.STRING,
+            mimeType: DataTypes.STRING,
+            fileName: DataTypes.STRING,
+            path: DataTypes.STRING,
+            size: DataTypes.INTEGER,
             userId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

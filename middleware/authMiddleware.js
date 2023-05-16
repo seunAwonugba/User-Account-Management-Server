@@ -21,7 +21,6 @@ const authMiddleware = async (req, res, next) => {
         //req.user can be accessed in any route that is authenticated
         req.user = {
             id: decode.id,
-            name: decode.name,
             email: decode.email,
         };
         next();

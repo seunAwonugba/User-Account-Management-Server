@@ -16,14 +16,18 @@ class ProfileImageRepository {
         return profileImage;
     }
 
-    async updateProfileImage(payload) {
-        const { type, name, blob, userId } = payload;
+    async updateProfileImage(payload, userId) {
+        const { fieldname, originalname, mimetype, filename, path, size } =
+            payload;
 
         const newProfileImage = await profilePhoto.update(
             {
-                type,
-                name,
-                // blob : ,
+                fieldName: fieldname,
+                originalName: originalname,
+                mimeType: mimetype,
+                fileName: filename,
+                path,
+                size,
             },
             {
                 where: {
