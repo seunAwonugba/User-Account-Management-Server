@@ -11,7 +11,6 @@ class ProfileImageService {
     }
 
     async updateProfileImage(payload, userId) {
-        console.log(payload);
         if (!payload) {
             throw new UnprocessableEntity("Select image");
         }
@@ -21,6 +20,20 @@ class ProfileImageService {
                 payload,
                 userId
             );
+
+        return {
+            success: true,
+            data: profileImage,
+        };
+    }
+
+    async getProfileImage(userId) {
+        const profileImage =
+            await this.profileImageRepository.findProfileImageByUserId(userId);
+
+        if (!profileImage.path) {
+            throw new BadRequest("Image not found");
+        }
 
         return {
             success: true,

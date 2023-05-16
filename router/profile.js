@@ -3,6 +3,7 @@ const {
     getProfile,
     editProfile,
     updateProfileImage,
+    getProfileImage,
 } = require("../controller/profile");
 const {
     imageUploadMiddleware,
@@ -17,5 +18,6 @@ profileRouter.patch(
     imageUploadMiddleware.single("profile-image"),
     updateProfileImage
 );
+profileRouter.get("/get-profile-image", getProfileImage);
 
 module.exports = { profileRouter };

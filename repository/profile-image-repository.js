@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { profilePhoto } = require("../models");
 class ProfileImageRepository {
     async createProfileImage(userId) {
@@ -28,6 +29,7 @@ class ProfileImageRepository {
                 fileName: filename,
                 path,
                 size,
+                image: `http://${process.env.HOST}:${process.env.PORT}/${filename}`,
             },
             {
                 where: {

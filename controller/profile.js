@@ -24,7 +24,6 @@ const editProfile = async (req, res, next) => {
 };
 
 const updateProfileImage = async (req, res, next) => {
-    // console.log(req.file);
     try {
         const updateProfileImage = await profileImageService.updateProfileImage(
             req.file,
@@ -36,4 +35,21 @@ const updateProfileImage = async (req, res, next) => {
     }
 };
 
-module.exports = { getProfile, editProfile, updateProfileImage };
+const getProfileImage = async (req, res, next) => {
+    try {
+        const profileImage = await profileImageService.getProfileImage(
+            req.user.id
+        );
+
+        return res.status(StatusCodes.OK).json(profileImage);
+    } catch (error) {
+        next();
+    }
+};
+
+module.exports = {
+    getProfile,
+    editProfile,
+    updateProfileImage,
+    getProfileImage,
+};
