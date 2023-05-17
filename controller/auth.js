@@ -47,7 +47,6 @@ const resetPassword = async (req, res, next) => {
 const login = async (req, res, next) => {
     try {
         const data = await userService.login(req.body);
-
         return res.status(StatusCodes.OK).json(data);
     } catch (error) {
         next(error);

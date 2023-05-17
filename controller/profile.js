@@ -40,7 +40,6 @@ const getProfileImage = async (req, res, next) => {
         const profileImage = await profileImageService.getProfileImage(
             req.user.id
         );
-
         return res.status(StatusCodes.OK).json(profileImage);
     } catch (error) {
         next();
