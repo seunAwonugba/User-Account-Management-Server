@@ -31,6 +31,14 @@ module.exports = (sequelize, DataTypes) => {
                     allowNull: false,
                 },
             });
+
+            User.hasOne(models.otp, {
+                onDelete: "CASCADE",
+                foreignKey: {
+                    name: "userId",
+                    allowNull: false,
+                },
+            });
         }
 
         toJSON() {
