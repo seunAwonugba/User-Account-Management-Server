@@ -1,8 +1,10 @@
 const { StatusCodes } = require("http-status-codes");
 const { UserService } = require("../service/user-service");
 const { VerifyRefreshToken } = require("../utils");
+const { OtpService } = require("../service/otp-service");
 
 const userService = new UserService();
+const otpService = new OtpService();
 
 const signUp = async (req, res, next) => {
     try {
@@ -61,6 +63,16 @@ const refreshToken = async (req, res, next) => {
         next(error);
     }
 };
+
+const implementOtp = async (req, res) => {
+    try {
+        const otp = await otpService.updateOtp(req.user.id);
+        return res.status(StatusCodes.CREATED).json(otp);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     signUp,
     confirmEmail,
@@ -68,4 +80,5 @@ module.exports = {
     resetPassword,
     login,
     refreshToken,
+    implementOtp,
 };

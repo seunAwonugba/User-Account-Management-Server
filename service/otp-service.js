@@ -9,5 +9,12 @@ class OtpService {
     async updateOtp(userId) {
         const otpData = GenerateOtpSecreteKey();
         const otp = await this.otpRepository.updateOtp(otpData, userId);
+
+        return {
+            success: true,
+            data: otp,
+        };
     }
 }
+
+module.exports = { OtpService };
