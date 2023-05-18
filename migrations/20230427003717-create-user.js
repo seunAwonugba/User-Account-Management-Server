@@ -54,6 +54,16 @@ module.exports = {
                 allowNull: false,
                 defaultValue: false,
             },
+            otpEnabled: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: false,
+            },
+            otpVerified: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: false,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

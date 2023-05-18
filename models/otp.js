@@ -14,12 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
     Otp.init(
         {
-            otpEnabled: DataTypes.BOOLEAN,
-            otpVerified: DataTypes.BOOLEAN,
             otpAscii: DataTypes.STRING,
             otpHex: DataTypes.STRING,
             otpBase32: DataTypes.STRING,
             otpAuthUrl: DataTypes.STRING,
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                unique: {
+                    args: true,
+                    msg: "OTP unique to a user",
+                },
+            },
         },
         {
             sequelize,

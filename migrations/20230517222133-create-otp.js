@@ -9,12 +9,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            otpEnabled: {
-                type: Sequelize.BOOLEAN,
-            },
-            otpVerified: {
-                type: Sequelize.BOOLEAN,
-            },
             otpAscii: {
                 type: Sequelize.STRING,
             },
@@ -26,6 +20,16 @@ module.exports = {
             },
             otpAuthUrl: {
                 type: Sequelize.STRING,
+            },
+            userId: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: "User id is required",
+                    },
+                },
+                unique: true,
             },
             createdAt: {
                 allowNull: false,

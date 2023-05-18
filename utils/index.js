@@ -1,6 +1,7 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
-require("dotenv").config();
+const speakeasy = require("speakeasy");
 
 module.exports.GenerateToken = async (params) => {
     try {
@@ -53,6 +54,15 @@ module.exports.ComparePasswords = async (string, hash) => {
     try {
         const comparePasswords = await bcryptjs.compare(string, hash);
         return comparePasswords;
+    } catch (error) {
+        return error;
+    }
+};
+
+module.exports.GenerateOtpSecreteKey = () => {
+    try {
+        const secret = speakeasy.generateSecret();
+        return secret;
     } catch (error) {
         return error;
     }
