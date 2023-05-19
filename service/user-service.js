@@ -252,6 +252,19 @@ class UserService {
             data: accessToken,
         };
     }
+
+    async getUser(userId) {
+        const user = await this.userRepository.findUserById(userId);
+
+        if (!user) {
+            throw new BadRequest("User not found");
+        }
+
+        return {
+            success: true,
+            data: user,
+        };
+    }
 }
 
 module.exports = { UserService };

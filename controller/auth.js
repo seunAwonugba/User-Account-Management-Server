@@ -83,6 +83,16 @@ const verifyOtp = async (req, res, next) => {
     }
 };
 
+const validateOtp = async (req, res, next) => {
+    const { otp } = req.body;
+    try {
+        const validateOtp = await otpService.validateOtp(req.user.id, otp);
+        return res.status(StatusCodes.CREATED).json(validateOtp);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     signUp,
     confirmEmail,
@@ -92,4 +102,5 @@ module.exports = {
     refreshToken,
     implementOtp,
     verifyOtp,
+    validateOtp
 };

@@ -61,7 +61,9 @@ module.exports.ComparePasswords = async (string, hash) => {
 
 module.exports.GenerateOtpSecreteKey = () => {
     try {
-        const secret = speakeasy.generateSecret();
+        const secret = speakeasy.generateSecret({
+            name: "user_account_management_app",
+        });
         return secret;
     } catch (error) {
         return error;
@@ -70,19 +72,29 @@ module.exports.GenerateOtpSecreteKey = () => {
 
 module.exports.VerifyOtp = (token, otpBase32) => {
     try {
-        const timeBasedToken = speakeasy.totp({
-            secret: otpBase32,
-            encoding: "base32",
-        });
-
         const verified = speakeasy.totp.verify({
             secret: otpBase32,
             encoding: "base32",
-            token: timeBasedToken,
+            token,
         });
-
         return verified;
     } catch (error) {
         return error;
     }
 };
+
+module.exports.ValidateOtp = (token, otpBase32) => {
+    try {
+        const verified = speakeasy.totp.verify({
+            secret: otpBase32,
+            encoding: "base32",
+            token,
+            window: 1
+        });
+        return verified;
+    } catch (error) {
+        return error;
+    }
+};
+
+

@@ -16,6 +16,7 @@ const { profileRouter } = require("./router/profile");
 const { authMiddleware } = require("./middleware/authMiddleware");
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const { otpRouter } = require("./router/otp");
+const { userRouter } = require("./router/user");
 
 app.set("trust proxy", 1);
 app.use(
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/profile", authMiddleware, profileRouter);
 app.use("/api/v1/otp", authMiddleware, otpRouter);
+app.use("/api/v1/user", authMiddleware, userRouter);
 
 app.use(errorMiddleware);
 

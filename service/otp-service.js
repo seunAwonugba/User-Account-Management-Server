@@ -1,7 +1,7 @@
 const { BadRequest } = require("../error");
 const { OtpRepository } = require("../repository/otp-repository");
 const { UserRepository } = require("../repository/user-repository");
-const { GenerateOtpSecreteKey, VerifyOtp } = require("../utils");
+const { GenerateOtpSecreteKey, VerifyOtp, ValidateOtp } = require("../utils");
 
 class OtpService {
     constructor() {
@@ -35,10 +35,9 @@ class OtpService {
         }
 
         const verified = VerifyOtp(otp, otpBase32);
-        console.log(verified);
 
         if (!verified) {
-            throw new BadRequest("Invalid OTP");
+            throw new BadRequest("OTP cannot be verified");
         }
 
         const updateUser = user.set({
@@ -46,9 +45,38 @@ class OtpService {
             otpVerified: true,
         });
 
+        await user.save();
+
         return {
             success: true,
             data: updateUser,
+        };
+    }
+
+    async validateOtp(userId, otp) {
+        const user = await this.userRepository.findUserById(userId);
+
+        if (!user) {
+            throw new BadRequest("User not found");
+        }
+
+        const getOtp = await user.getOtp();
+
+        const otpBase32 = getOtp.otpBase32;
+
+        if (!otpBase32) {
+            throw new BadRequest("Please enable mfa to proceed");
+        }
+
+        const validate = ValidateOtp(otp, otpBase32);
+
+        if (!validate) {
+            throw new BadRequest("Invalid OTP");
+        }
+
+        return {
+            success: true,
+            data: user,
         };
     }
 }
