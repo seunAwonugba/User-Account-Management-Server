@@ -64,10 +64,20 @@ const refreshToken = async (req, res, next) => {
     }
 };
 
-const implementOtp = async (req, res) => {
+const implementOtp = async (req, res, next) => {
     try {
         const otp = await otpService.updateOtp(req.user.id);
         return res.status(StatusCodes.CREATED).json(otp);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const verifyOtp = async (req, res, next) => {
+    const { otp } = req.body;
+    try {
+        const verifyOtp = await otpService.verifyOtp(req.user.id, otp);
+        return res.status(StatusCodes.CREATED).json(verifyOtp);
     } catch (error) {
         next(error);
     }
@@ -81,4 +91,5 @@ module.exports = {
     login,
     refreshToken,
     implementOtp,
+    verifyOtp,
 };

@@ -67,3 +67,22 @@ module.exports.GenerateOtpSecreteKey = () => {
         return error;
     }
 };
+
+module.exports.VerifyOtp = (token, otpBase32) => {
+    try {
+        const timeBasedToken = speakeasy.totp({
+            secret: otpBase32,
+            encoding: "base32",
+        });
+
+        const verified = speakeasy.totp.verify({
+            secret: otpBase32,
+            encoding: "base32",
+            token: timeBasedToken,
+        });
+
+        return verified;
+    } catch (error) {
+        return error;
+    }
+};
