@@ -79,6 +79,26 @@ class OtpService {
             data: user,
         };
     }
+
+    async disableOtp(userId) {
+        const user = await this.userRepository.findUserById(userId);
+
+        if (!user) {
+            throw new BadRequest("User not found");
+        }
+
+        const updateUser = user.set({
+            otpEnabled: false,
+            otpVerified: false,
+        });
+
+        await user.save();
+
+        return {
+            success: true,
+            data: updateUser,
+        };
+    }
 }
 
 module.exports = { OtpService };

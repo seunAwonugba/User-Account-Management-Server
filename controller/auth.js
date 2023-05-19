@@ -93,6 +93,15 @@ const validateOtp = async (req, res, next) => {
     }
 };
 
+const disableOtp = async (req, res, next) => {
+    try {
+        const disableOtp = await otpService.disableOtp(req.user.id);
+        return res.status(StatusCodes.OK).json(disableOtp);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     signUp,
     confirmEmail,
@@ -102,5 +111,6 @@ module.exports = {
     refreshToken,
     implementOtp,
     verifyOtp,
-    validateOtp
+    validateOtp,
+    disableOtp,
 };
