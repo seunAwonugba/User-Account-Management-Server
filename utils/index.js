@@ -89,7 +89,7 @@ module.exports.ValidateOtp = (token, otpBase32) => {
             secret: otpBase32,
             encoding: "base32",
             token,
-            window: 1
+            window: 1,
         });
         return verified;
     } catch (error) {
@@ -97,4 +97,16 @@ module.exports.ValidateOtp = (token, otpBase32) => {
     }
 };
 
-
+module.exports.MapMaritalStatus = (userResponse) => {
+    try {
+        const responseMap = {
+            single: "SINGLE",
+            married: "MARRIED",
+            divorced: "DIVORCED",
+            widowed: "WIDOWED",
+        };
+        return responseMap[userResponse.toLowerCase()] || null;
+    } catch (error) {
+        return error;
+    }
+};

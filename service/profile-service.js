@@ -18,17 +18,17 @@ class ProfileService {
         };
     }
 
-    async editProfile(payload) {
-        await this.getProfile(payload.userId);
+    async editProfile(data, id) {
+        await this.getProfile(id);
 
-        const newProfile = await this.profileRepository.editProfile(payload);
+        const newProfile = await this.profileRepository.editProfile(data,id);
+        // await this.
 
         return {
             success: true,
             data: newProfile,
         };
     }
-    
 }
 
 module.exports = { ProfileService };

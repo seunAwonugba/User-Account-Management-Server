@@ -16,7 +16,10 @@ const getProfile = async (req, res, next) => {
 
 const editProfile = async (req, res, next) => {
     try {
-        const newProfile = await profileService.editProfile(req.body);
+        const newProfile = await profileService.editProfile(
+            req.body,
+            req.user.id
+        );
         return res.status(StatusCodes.CREATED).json(newProfile);
     } catch (error) {
         next(error);

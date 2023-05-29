@@ -1,4 +1,5 @@
 const { profile } = require("../models");
+const { MapMaritalStatus } = require("../utils");
 
 class ProfileRepository {
     async createUserProfile({ firstName, lastName, email, userId }) {
@@ -18,9 +19,8 @@ class ProfileRepository {
         return userProfile;
     }
 
-    async editProfile(payload) {
+    async editProfile(payload, id) {
         const {
-            // photo,
             firstName,
             lastName,
             email,
@@ -28,25 +28,25 @@ class ProfileRepository {
             age,
             dob,
             maritalStatus,
-            nationality,
-            userId,
+            country,
         } = payload;
+
+        const mapMaritalStatus = MapMaritalStatus(maritalStatus);
 
         const newProfile = await profile.update(
             {
-                // photo,
                 firstName,
                 lastName,
                 email,
                 gender,
                 age,
                 dob,
-                maritalStatus,
-                nationality,
+                maritalStatus: mapMaritalStatus,
+                nationality: country,
             },
             {
                 where: {
-                    userId,
+                    userId: id,
                 },
                 returning: true,
             }
