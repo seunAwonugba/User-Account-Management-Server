@@ -36,6 +36,25 @@ class UserRepository {
 
         return deleteUser;
     }
+
+    async updateUser(payload, id) {
+        const updateUser = await user.update(
+            {
+                firstName: payload.firstName,
+                lastName: payload.lastName,
+                email: payload.email,
+            },
+            {
+                where: {
+                    id,
+                },
+                returning: true,
+            }
+        );
+        const [_numAffectedRows, [updatedData]] = updateUser;
+
+        return updatedData;
+    }
 }
 
 module.exports = { UserRepository };

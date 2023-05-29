@@ -1,8 +1,10 @@
 const { BadRequest } = require("../error");
 const { ProfileRepository } = require("../repository/profile-repository");
+const { UserRepository } = require("../repository/user-repository");
 class ProfileService {
     constructor() {
         this.profileRepository = new ProfileRepository();
+        this.userRepository = new UserRepository();
     }
 
     async getProfile(userId) {
@@ -21,8 +23,8 @@ class ProfileService {
     async editProfile(data, id) {
         await this.getProfile(id);
 
-        const newProfile = await this.profileRepository.editProfile(data,id);
-        // await this.
+        const newProfile = await this.profileRepository.editProfile(data, id);
+        await this.userRepository.updateUser(data, id);
 
         return {
             success: true,
