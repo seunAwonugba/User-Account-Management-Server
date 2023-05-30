@@ -25,6 +25,9 @@ const {
     ProfileImageRepository,
 } = require("../repository/profile-image-repository");
 const { OtpRepository } = require("../repository/otp-repository");
+const {
+    VerificationDocumentRepository,
+} = require("../repository/verification-document-repository");
 
 class UserService {
     constructor() {
@@ -33,6 +36,8 @@ class UserService {
         this.profileRepository = new ProfileRepository();
         this.profileImageRepository = new ProfileImageRepository();
         this.otpRepository = new OtpRepository();
+        this.verificationDocumentsRepository =
+            new VerificationDocumentRepository();
     }
 
     async signUp(payload) {
@@ -119,6 +124,10 @@ class UserService {
         await this.profileImageRepository.createProfileImage(user.id);
 
         await this.otpRepository.createOtp(user.id);
+
+        await this.verificationDocumentsRepository.createVerificationDocuments(
+            user.id
+        );
 
         return {
             success: true,
