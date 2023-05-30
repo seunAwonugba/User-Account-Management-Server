@@ -100,6 +100,19 @@ module.exports.ValidateOtp = (token, otpBase32) => {
 module.exports.MapMaritalStatus = (userResponse) => {
     try {
         const responseMap = {
+            unverified: "UNVERIFIED",
+            pending: "PENDING VERIFICATION",
+            verified: "VERIFIED",
+        };
+        return responseMap[userResponse.toLowerCase()] || null;
+    } catch (error) {
+        return error;
+    }
+};
+
+module.exports.MapVerificationStatus = (userResponse) => {
+    try {
+        const responseMap = {
             single: "SINGLE",
             married: "MARRIED",
             divorced: "DIVORCED",

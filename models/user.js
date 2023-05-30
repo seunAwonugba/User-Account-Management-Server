@@ -113,6 +113,15 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 defaultValue: false,
             },
+            status: {
+                type: DataTypes.ENUM(
+                    "UNVERIFIED",
+                    "PENDING VERIFICATION",
+                    "VERIFIED"
+                ),
+                allowNull: false,
+                defaultValue: "UNVERIFIED",
+            },
         },
         {
             sequelize,
