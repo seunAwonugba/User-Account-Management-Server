@@ -12,7 +12,7 @@ class ProfileImageService {
 
     async updateProfileImage(payload, userId) {
         if (!payload) {
-            throw new UnprocessableEntity("Select image");
+            throw new UnprocessableEntity("Select image to upload");
         }
 
         const profileImage =

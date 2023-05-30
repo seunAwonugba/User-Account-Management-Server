@@ -24,7 +24,7 @@ module.exports = {
             path: {
                 type: Sequelize.STRING,
             },
-            image: {
+            docs: {
                 type: Sequelize.STRING,
             },
             size: {

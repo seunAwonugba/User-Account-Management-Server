@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             mimeType: DataTypes.STRING,
             fileName: DataTypes.STRING,
             path: DataTypes.STRING,
-            image: DataTypes.STRING,
+            docs: DataTypes.STRING,
             size: DataTypes.STRING,
             documentType: DataTypes.STRING,
             documentNumber: DataTypes.STRING,

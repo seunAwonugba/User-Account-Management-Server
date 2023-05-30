@@ -17,6 +17,7 @@ const { authMiddleware } = require("./middleware/authMiddleware");
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const { otpRouter } = require("./router/otp");
 const { userRouter } = require("./router/user");
+const { verifyMeRouter } = require("./router/verifyMe");
 
 app.set("trust proxy", 1);
 app.use(
@@ -42,6 +43,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/profile", authMiddleware, profileRouter);
 app.use("/api/v1/otp", authMiddleware, otpRouter);
 app.use("/api/v1/user", authMiddleware, userRouter);
+app.use("/api/v1/verify", authMiddleware, verifyMeRouter);
 
 app.use(errorMiddleware);
 
