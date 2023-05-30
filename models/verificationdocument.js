@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-    class ProfilePhoto extends Model {
+    class VerificationDocument extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            ProfilePhoto.belongsTo(models.user);
+            VerificationDocument.belongsTo(models.user);
         }
     }
-    ProfilePhoto.init(
+    VerificationDocument.init(
         {
             fieldName: DataTypes.STRING,
             originalName: DataTypes.STRING,
@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
             fileName: DataTypes.STRING,
             path: DataTypes.STRING,
             image: DataTypes.STRING,
-            size: DataTypes.INTEGER,
+            size: DataTypes.STRING,
+            documentType: DataTypes.STRING,
+            documentNumber: DataTypes.STRING,
             userId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -31,15 +33,15 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 unique: {
                     args: true,
-                    msg: "Image unique to a user",
+                    msg: "Document unique to a user",
                 },
             },
         },
         {
             sequelize,
-            tableName: "profilePhotos",
-            modelName: "profilePhoto",
+            tableName: "verificationDocuments",
+            modelName: "verificationDocument",
         }
     );
-    return ProfilePhoto;
+    return VerificationDocument;
 };
