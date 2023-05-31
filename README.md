@@ -20,7 +20,7 @@ Sequelize - ORM
 2. Run the following command to clone:
 
 ```bash
-  git clone https://github.com/seunAwonugba/User-Account-Management.git
+  git clone https://github.com/seunAwonugba/User-Account-Management-Server.git 
 ```
 
 3. Create a `.env` file in the root directory and set the environment variables, see `.env.example` file for an example
