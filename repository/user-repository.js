@@ -2,13 +2,13 @@ const { user } = require("../models");
 
 class UserRepository {
     async createUser(data) {
-        const createUser = user.create(data);
+        const createUser = await user.create(data);
 
         return createUser;
     }
 
     async findUserById(id) {
-        const findUser = user.findOne({
+        const findUser = await user.findOne({
             where: {
                 id,
             },
@@ -18,7 +18,7 @@ class UserRepository {
     }
 
     async findUserByEmail(email) {
-        const findUser = user.findOne({
+        const findUser = await user.findOne({
             where: {
                 email,
             },
@@ -28,7 +28,7 @@ class UserRepository {
     }
 
     async deleteUserById(id) {
-        const deleteUser = user.destroy({
+        const deleteUser = await user.destroy({
             where: {
                 id,
             },

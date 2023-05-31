@@ -2,7 +2,7 @@ const { token } = require("../models");
 
 class TokenRepository {
     async createToken({ accessToken, userId }) {
-        const createToken = token.create({
+        const createToken = await token.create({
             token: accessToken,
             userId,
         });
@@ -11,7 +11,7 @@ class TokenRepository {
     }
 
     async findToken(accessToken) {
-        const findToken = token.findOne({
+        const findToken = await token.findOne({
             where: {
                 token: accessToken,
             },
@@ -21,7 +21,7 @@ class TokenRepository {
     }
 
     async findTokenByUserId(userId) {
-        const findToken = token.findOne({
+        const findToken = await token.findOne({
             where: {
                 userId,
             },
@@ -31,7 +31,7 @@ class TokenRepository {
     }
 
     async deleteToken(userId) {
-        const deleteToken = token.destroy({
+        const deleteToken = await token.destroy({
             where: {
                 userId,
             },
