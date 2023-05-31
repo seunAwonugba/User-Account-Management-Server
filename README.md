@@ -20,7 +20,7 @@ Sequelize - ORM
 2. Run the following command to clone:
 
 ```bash
-  git clone https://github.com/seunAwonugba/User-Account-Management-Server.git 
+  git clone https://github.com/seunAwonugba/User-Account-Management-Server.git
 ```
 
 3. Create a `.env` file in the root directory and set the environment variables, see `.env.example` file for an example
@@ -80,6 +80,21 @@ Executing (default): SELECT 1+1 AS result
 
 It means server is up and running
 
+## Running the tests
+
+To run the test, run the following migration script
+
+```bash
+npm run db:migrate:test
+```
+
+Next run the following command to run tests:
+In this case, we're using cross-env to set environment variables, jest to execute test suites, and testTimeout is set to 5000 because certain requests might take a while to finish.
+
+```bash
+npm run test
+```
+
 ## Security features:
 
 Helmet: Helmet helps you secure your Express apps by setting various HTTP headers.
@@ -99,3 +114,7 @@ Express.js is a popular and widely-used web framework for Node.js that makes it 
 ## Sequelize
 
 Sequelize is an Object-Relational Mapping (ORM) library for Node.js that provides an abstraction layer for interacting with relational databases. It allows us to write database queries using JavaScript instead of SQL, which makes it easier to manage database interactions and reduces the risk of SQL injection attacks. We used Sequelize in this project to interact with our PostgreSQL database.
+
+## Jest and Supertest
+
+Jest is a testing framework for JavaScript that is widely used for testing Node.js applications. It provides a lot of useful features out of the box, such as mocking and assertion functions, and allows us to write tests in a declarative and readable way. Supertest is a library that allows us to test HTTP endpoints in our Node.js application. We used Jest and Supertest in this project to write unit tests and integration tests for our API, which helps to ensure that our code is working as expected and catches errors before they can cause problems in production.

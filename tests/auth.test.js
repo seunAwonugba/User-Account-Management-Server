@@ -13,13 +13,17 @@ process.env.PG_DIALECT = "postgres";
 describe("user sign up", () => {
     it("Should respond with confirmation email sent", async () => {
         const res = await request(app).post("/api/v1/auth/create-user").send({
-            firstName: "seun1",
-            lastName: "awonugba1",
-            email: "seunawonugba+1@gmail.com",
+            firstName: "seun3",
+            lastName: "awonugba3",
+            email: "seunawonugba+3@gmail.com",
             password: "Chemistry500*",
             repeat_password: "Chemistry500*",
         });
 
         expect(res.statusCode).toBe(201);
+        expect(res.body.success).toBe(true);
+        expect(res.body.data).toBe(
+            "Confirmation email sent to seunawonugba+3@gmail.com, please proceed to your mail box to confirm your email address"
+        );
     });
 });
