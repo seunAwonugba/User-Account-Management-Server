@@ -1,4 +1,5 @@
 const { UnprocessableEntity } = require("../error");
+const { UserRepository } = require("../repository/user-repository");
 const {
     VerificationDocumentRepository,
 } = require("../repository/verification-document-repository");
@@ -7,6 +8,8 @@ class VerificationDocumentService {
     constructor() {
         this.verificationDocumentRepository =
             new VerificationDocumentRepository();
+
+        this.userRepository = new UserRepository();
     }
 
     async updateVerificationDocs(file, body, userId) {
@@ -20,6 +23,8 @@ class VerificationDocumentService {
                 body,
                 userId
             );
+
+        await this.userRepository.updateVerificationStatus(userId);
 
         return {
             success: true,

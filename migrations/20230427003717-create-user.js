@@ -65,11 +65,7 @@ module.exports = {
                 defaultValue: false,
             },
             status: {
-                type: Sequelize.ENUM(
-                    "UNVERIFIED",
-                    "PENDING VERIFICATION",
-                    "VERIFIED"
-                ),
+                type: Sequelize.ENUM("UNVERIFIED", "PENDING", "VERIFIED"),
                 allowNull: false,
                 defaultValue: "UNVERIFIED",
             },

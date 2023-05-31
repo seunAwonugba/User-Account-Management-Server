@@ -22,11 +22,9 @@ const errorMiddleware = (err, req, res, next) => {
             data: err.details[0].message,
         });
     }
-    console.log(err);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         success: false,
-        data: err,
-        // .message.split(":")[2] || "Unknown error occurred",
+        data: err.message.split(":")[2] || "Unknown error occurred",
     });
 };
 

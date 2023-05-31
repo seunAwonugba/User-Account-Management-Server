@@ -55,6 +55,23 @@ class UserRepository {
 
         return updatedData;
     }
+
+    async updateVerificationStatus(id) {
+        const updateUser = await user.update(
+            {
+                status: "PENDING",
+            },
+            {
+                where: {
+                    id,
+                },
+                returning: true,
+            }
+        );
+        const [_numAffectedRows, [updatedData]] = updateUser;
+
+        return updatedData;
+    }
 }
 
 module.exports = { UserRepository };
