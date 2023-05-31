@@ -88,7 +88,7 @@ To run the test, run the following migration script
 npm run db:migrate:test
 ```
 
-Next run the following command to run tests:
+Next run the following command to run all test cases in `tests` directory:
 In this case, we're using cross-env to set environment variables, jest to execute test suites, and testTimeout is set to 5000 because certain requests might take a while to finish.
 
 ```bash
